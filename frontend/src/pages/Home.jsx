@@ -1,6 +1,7 @@
 import { CircleDollarSign, PlayCircle } from "lucide-react";
 import Greetings from "../components/shared/home/Greetings";
 import MiniCard from "../components/shared/home/MiniCard";
+import RecentOrders from "../components/shared/home/Orders";
 
 export function Home() {
     return (
@@ -12,6 +13,7 @@ export function Home() {
                     <MiniCard title="Total Earnings" icon={<CircleDollarSign />} number={512} footerNum={1.6} />
                     <MiniCard title="InProgress" icon={<PlayCircle />} number={16} footerNum={3.6} />
                 </div>
+                <RecentOrders />
             </div>
 
             {/* Right */}
