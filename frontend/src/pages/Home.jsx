@@ -1,7 +1,8 @@
 import { CircleDollarSign, PlayCircle } from "lucide-react";
-import Greetings from "../components/shared/home/Greetings";
-import MiniCard from "../components/shared/home/MiniCard";
-import RecentOrders from "../components/shared/home/Orders";
+import Greetings from "../components/home/Greetings";
+import MiniCard from "../components/home/MiniCard";
+import RecentOrders from "../components/home/Orders";
+import PopularDishes from "../components/home/PopularDishes";
 
 export function Home() {
     return (
@@ -17,8 +18,8 @@ export function Home() {
             </div>
 
             {/* Right */}
-            <div className="flex-2 bg-[#1a1a1a]">
-
+            <div className="flex-2 bg-[#1f1f1f]">
+                <PopularDishes />
             </div>
 
 
