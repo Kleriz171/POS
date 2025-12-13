@@ -4,7 +4,7 @@ const PopularDishes = () => {
     return (
         <div className="pr-6 mt-6">
             <div className="bg-[#1a1a1a] w-full h-[740px] rounded-lg">
-                
+
                 <div className="flex justify-between items-center px-6 py-4">
                     <h1 className="text-[#f5f5f5] text-lg font-semibold tracking-wide">
                         Popular Dishes
@@ -25,7 +25,11 @@ const PopularDishes = () => {
                             key={dish.id}
                             className="flex justify-between items-center bg-[#1f1f1f] rounded-lg px-4 py-3"
                         >
+
                             <div className="flex items-center gap-3">
+                                <h1 className="text-[#f5f5f5] text-sm">
+                                    {dish.id < 10 ? `0${dish.id}` : dish.id}
+                                </h1>
                                 <img
                                     src={dish.image}
                                     alt={dish.name}
@@ -35,6 +39,7 @@ const PopularDishes = () => {
                             </div>
 
                             <span className="text-[#f5f5f5] text-sm">
+                                <span className="text-[#ababab]">Orders: </span>
                                 {dish.numberOfOrders}
                             </span>
                         </div>
