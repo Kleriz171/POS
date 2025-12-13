@@ -16,7 +16,22 @@ export function Orders() {
                         Completed</button>
                 </div>
             </div>
-            <div className="px-10 py-4">
+            <div className="px-10 py-4 flex flex-wrap gap-4 overflow-y-auto scrollbar-hide h-[calc(100vh-11.5rem)] [&::-webkit-scrollbar]:hidden scroll-smooth">
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
+                <OrderCard />
                 <OrderCard />
             </div>
         </section>
