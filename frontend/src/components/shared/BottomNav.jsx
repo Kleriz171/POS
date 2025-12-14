@@ -9,7 +9,7 @@ const BottomNav = () => {
                 <Home className='inline mr-4' size={30} /> Home</button>
             <button onClick={()=>navigate("/orders")} className='text-[#ababab] cursor-pointer bg-[#343434] w-[200px] rounded-[20px]'>
                 <List className='inline mr-4' size={30} />Orders</button>
-            <button onClick={()=>navigate("/")} className='text-[#ababab] bg-[#343434] cursor-pointer w-[200px] rounded-[20px]'>
+            <button onClick={()=>navigate("/tables")} className='text-[#ababab] bg-[#343434] cursor-pointer w-[200px] rounded-[20px]'>
                 <HandPlatter className='inline mr-4' size={30} />Tables</button>
             <button onClick={()=>navigate("/")} className='text-[#ababab] bg-[#343434] cursor-pointer w-[200px] rounded-[20px]'>
                 <MessageCircleMore className='inline mr-4' size={30} />More</button>
