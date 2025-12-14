@@ -6,6 +6,7 @@ import Modal from './Modal';
 const BottomNav = () => {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [guestCount, setGuestCount] = useState(1);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -42,13 +43,36 @@ const BottomNav = () => {
                 <ListOrdered size={30} className='ml-1' />
             </button>
 
-            <Modal title="Order Details" isOpen={isModalOpen} onClose={closeModal}>
+            <Modal isOpen={isModalOpen} onClose={closeModal} title="New Order">
                 <div>
-                    <label></label>
-                    <div>
-                        <input type="text" name='' placeholder='Enter customer name' />
+                    <label className='block text-[#ababab] mb-2 text-sm font-medium'>Customer name</label>
+                    <div className='flex items-center rounded-lg py-3 px-4 bg-[#1f1f1f]'>
+                        <input type="text" name='' id='' placeholder='Enter customer name'
+                            className=' bg-transparent flex-1 text-white focus:outline-none'
+                        />
                     </div>
                 </div>
+                <div>
+                    <label className='block text-[#ababab] mb-2 mt-3 text-sm font-medium'>Customer phone</label>
+                    <div className='flex items-center rounded-lg py-3 px-4 bg-[#1f1f1f]'>
+                        <input type="text" name='' id='' placeholder='+355 69 456 7890'
+                            className=' bg-transparent flex-1 text-white focus:outline-none'
+                        />
+                    </div>
+                </div>
+                <div>
+                    <label className='block text-[#ababab] mb-2 mt-3 text-sm font-medium'>Guest</label>
+                    <div className='flex items-center justify-between rounded-lg py-3 px-4 bg-[#1f1f1f]'>
+                        <button 
+                        onClick={()=> setGuestCount(  guestCount > 1 ?guestCount -1 : 1)}
+                        className='text-yellow-500 hover:text-yellow-800 text-2xl cursor-pointer'>&minus;</button>
+                        <span className='text-white'>{guestCount} { guestCount ===1? "Person": "People"}</span>
+                        <button 
+                        onClick={()=> setGuestCount(  guestCount <6 ? guestCount +1 :6)}
+                        className='text-yellow-500 hover:text-yellow-800 text-2xl cursor-pointer'>+</button>
+                    </div>
+                </div>
+                <button className='w-full bg-yellow-500 text-[#f5f5f5] py-3 rounded-lg mt-6 hover:bg-yellow-800 cursor-pointer'>Create Order</button>
             </Modal>
 
         </div>
