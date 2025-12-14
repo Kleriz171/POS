@@ -10,7 +10,7 @@ const OrderCard = () => {
                 <div className="flex items-center justify-between w-full">
                     <div className="flex flex-col items-start gap-1">
                         <h1 className="text-[#f5f5f5] text-lg font-semibold tracking-wide">
-                            Amrit Raj
+                            Kleris Biba
                         </h1>
                         <p className="text-[#ababab] text-sm"> #101/ Dine in</p>
                     </div>
