@@ -2,7 +2,7 @@ import OrderCard from "../components/orders/OrderCard";
 import BackButton from "../components/shared/BackButton"
 import { useState } from "react";
 
-export function Orders() {
+function Orders() {
     const [status, setStatus] = useState("all");
 
     return (
@@ -28,7 +28,7 @@ export function Orders() {
 
                 </div>
             </div>
-            <div className="px-10 py-4 flex flex-wrap gap-4 overflow-y-auto scrollbar-hide h-[calc(100vh-11.5rem)] [&::-webkit-scrollbar]:hidden scroll-smooth">
+            <div className="px-10 pt-4 pb-22 flex flex-wrap gap-4 overflow-y-auto scrollbar-hide h-[calc(100vh-11.5rem)] [&::-webkit-scrollbar]:hidden scroll-smooth ">
                 <OrderCard />
                 <OrderCard />
                 <OrderCard />
@@ -49,3 +49,5 @@ export function Orders() {
         </section>
     )
 }
+
+export default Orders;

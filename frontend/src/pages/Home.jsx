@@ -4,7 +4,7 @@ import MiniCard from "../components/home/MiniCard";
 import RecentOrders from "../components/home/Orders";
 import PopularDishes from "../components/home/PopularDishes";
 
-export function Home() {
+function Home() {
     return (
         <section className="bg-[#1f1f1f] h-[calc(100vh-6.5rem)] overflow-hidden flex gap-3">
             {/* Left Div */}
@@ -28,3 +28,5 @@ export function Home() {
         </section>
     )
 }
+
+export default Home;
