@@ -30,7 +30,9 @@ const MenuContainer = () => {
                                 key={menu.id}
                                 className={`flex flex-col items-start justify-between p-4 rounded-lg h-[100px] cursor-pointer 
                             ${menu.bgColor} hover:scale-105 transform transition-all duration-200`}
-                                onClick={() => setSelectedMenu(menu)}
+                                onClick={() => {setSelectedMenu(menu)
+                                                setCounts({});
+                                }}
                             >
                                 <div className="flex items-center justify-between w-full">
                                     <h1 className="text-[#f5f5f5] text-lg font-semibold">
