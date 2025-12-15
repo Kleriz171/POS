@@ -12,7 +12,7 @@ function Home() {
                 <Greetings />
                 <div className="flex items-center w-full gap-3 px-8 mt-8">
                     <MiniCard title="Total Earnings" icon={<CircleDollarSign />} number={512} footerNum={1.6} />
-                    <MiniCard title="InProgress" icon={<PlayCircle />} number={16} footerNum={3.6} />
+                    <MiniCard title="In Progress" icon={<PlayCircle />} number={16} footerNum={3.6} />
                 </div>
                 <RecentOrders />
             </div>

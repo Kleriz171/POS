@@ -372,15 +372,16 @@ export const salads = [
 
 
 export const menus = [
-  { id: 1, name: "Starters", bgColor: "#b73e3e", icon: "🍲", items: startersItem },
-  { id: 2, name: "Main Course", bgColor: "#5b45b0", icon: "🍛", items: mainCourse },
-  { id: 3, name: "Beverages", bgColor: "#7f167f", icon: "🍹", items: beverages },
-  { id: 4, name: "Soups", bgColor: "#735f32", icon: "🍜", items: soups },
-  { id: 5, name: "Desserts", bgColor: "#1d2569", icon: "🍰", items: desserts },
-  { id: 6, name: "Pizzas", bgColor: "#285430", icon: "🍕", items: pizzas },
-  { id: 7, name: "Alcoholic Drinks", bgColor: "#b73e3e", icon: "🍺", items: alcoholicDrinks },
-  { id: 8, name: "Salads", bgColor: "#5b45b0", icon: "🥗", items: salads },
+  { id: 1, name: "Starters", bgColor: "bg-rose-500", icon: "🍲", items: startersItem },
+  { id: 2, name: "Main Course", bgColor: "bg-indigo-500", icon: "🍛", items: mainCourse },
+  { id: 3, name: "Beverages", bgColor: "bg-purple-500", icon: "🍹", items: beverages },
+  { id: 4, name: "Soups", bgColor: "bg-amber-600", icon: "🍜", items: soups },
+  { id: 5, name: "Desserts", bgColor: "bg-blue-600", icon: "🍰", items: desserts },
+  { id: 6, name: "Pizzas", bgColor: "bg-emerald-600", icon: "🍕", items: pizzas },
+  { id: 7, name: "Alcoholic Drinks", bgColor: "bg-red-600", icon: "🍺", items: alcoholicDrinks },
+  { id: 8, name: "Salads", bgColor: "bg-green-600", icon: "🥗", items: salads },
 ];
+
 
 export const metricsData = [
   { title: "Revenue", value: "₹50,846.90", percentage: "12%", color: "#025cca", isIncrease: false },
