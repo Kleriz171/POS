@@ -32,7 +32,24 @@ const Menu = () => {
       </div>
 
       {/* Right */}
-      <div className="flex-1 bg-red-600">
+      <div className="flex-1 bg-[#1a1a1a] rounded-lg mt-4 mr-3 h-[calc(100%-6rem)] py-2">
+        {/* Customer Info */}
+        <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex flex-col items-start">
+            <h1 className="text-[#f5f5f5] text-l font-bold">
+              Customer Name
+            </h1>
+            <p className="text-[#ababab] text-m">Table No: 2</p>
+          </div>
+          <div>
+            <button className="bg-[#f6b100] text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition duration-300">
+              Clear Table
+            </button>
+          </div>
+        </div>
+        <hr className="border-[#333333] border-t-2"/>
+        {/* Cart Items */}
+        {/* Bills */}
       </div>
 
 
