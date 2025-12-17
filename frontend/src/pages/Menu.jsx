@@ -2,6 +2,7 @@ import MenuContainer from "../components/menu/MenuContainer";
 import BackButton from "../components/shared/BackButton";
 import { Utensils } from "lucide-react";
 import CartInfo from "../components/menu/CartInfo";
+import CustomerInfo from "../components/menu/CustomerInfo";
 
 const Menu = () => {
 
@@ -35,21 +36,11 @@ const Menu = () => {
       {/* Right */}
       <div className="flex-1 bg-[#1a1a1a] rounded-lg mt-4 mr-3 h-[calc(100%-6rem)] py-2">
         {/* Customer Info */}
-        <div className="flex items-center justify-between px-4 py-3">
-          <div className="flex flex-col items-start">
-            <h1 className="text-[#f5f5f5] text-l font-bold">
-              Customer Name
-            </h1>
-            <p className="text-[#ababab] text-m">Table No: 2</p>
-          </div>
-          <div>
-            <button className="bg-[#f6b100] text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition duration-300">
-              Clear Table
-            </button>
-          </div>
-        </div>
+        <CustomerInfo />
         <hr className="border-[#333333] border-t-2" />
+
         {/* Cart Items */}
+        <h1 className="text-lg text-[#e4e4e4] font-semibold tracking-wide px-4 py-2">Order Details</h1>
         <CartInfo />
         <CartInfo />
         {/* Bills */}
