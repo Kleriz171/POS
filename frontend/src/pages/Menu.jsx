@@ -3,6 +3,7 @@ import BackButton from "../components/shared/BackButton";
 import { Utensils } from "lucide-react";
 import CartInfo from "../components/menu/CartInfo";
 import CustomerInfo from "../components/menu/CustomerInfo";
+import Bill from "../components/menu/Bill";
 
 const Menu = () => {
 
@@ -44,6 +45,7 @@ const Menu = () => {
         <CartInfo />
         <CartInfo />
         {/* Bills */}
+        <Bill />
       </div>
 
 
