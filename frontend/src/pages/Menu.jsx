@@ -28,7 +28,7 @@ const Menu = () => {
                 <h1 className="text-white text-l font-bold">
                   {customerData.customerName}
                 </h1>
-                <p className="text-[#929292fe] text-m">Table No: 2</p>
+                <p className="text-[#929292fe] text-m">{customerData.tableNo}</p>
               </div>
             </div>
           </div>

@@ -10,19 +10,21 @@ const BottomNav = () => {
     const dispatch = useDispatch()
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [guestCount, setGuestCount] = useState(1);
-    const [name, setName] = useState()
-    const [phone, setPhone] = useState()
+    const [name, setName] = useState("")
+    const [phone, setPhone] = useState("")
 
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
     const handleCreateOrder = () => {
-        //send data to store
-        setIsModalOpen(false)
-        dispatch(setCustomer({name, phone, guests: guestCount}))
-        navigate("/tables")
-    }
+        if (!name.trim()) return;
+
+        dispatch(setCustomer({ name, phone, guests: guestCount }));
+        setIsModalOpen(false);
+        navigate("/tables");
+    };
+
 
     return (
         <div className='fixed bottom-0 left-0 right-0 bg-[#262626] p-2 h-16 flex justify-around z-50'>
