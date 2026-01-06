@@ -46,3 +46,16 @@ export function getRandomBg() {
 
     return colors[Math.floor(Math.random() * colors.length)];
 }
+
+export const getAvatarName = (name) => {
+    if (!name) return ""
+
+    return name
+        ?.trim()
+        .split(/\s+/)
+        .slice(0, 2)
+        .map(word => word[0])
+        .join("")
+        .toUpperCase();
+
+}

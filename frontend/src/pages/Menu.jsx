@@ -4,8 +4,11 @@ import { Utensils } from "lucide-react";
 import CartInfo from "../components/menu/CartInfo";
 import CustomerInfo from "../components/menu/CustomerInfo";
 import Bill from "../components/menu/Bill";
+import { useSelector } from "react-redux";
 
 const Menu = () => {
+
+  const customerData = useSelector((state) => state.customer)
 
   return (
     <section className="bg-[#1f1f1f] flex gap-3 h-[calc(100vh-6.5rem)] overflow-hidden">
@@ -23,7 +26,7 @@ const Menu = () => {
               <Utensils className="stroke-white text-2xl" />
               <div className="flex flex-col items-start">
                 <h1 className="text-white text-l font-bold">
-                  Customer Name
+                  {customerData.customerName}
                 </h1>
                 <p className="text-[#929292fe] text-m">Table No: 2</p>
               </div>

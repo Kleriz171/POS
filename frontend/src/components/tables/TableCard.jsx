@@ -1,12 +1,16 @@
+import { useDispatch } from "react-redux";
 import { getRandomBg } from "../../utils/randombg";
 import { useNavigate } from "react-router-dom";
+import { updateTable } from "../../redux/slices/customerSlice";
 
 const TableCard = ( { id, name, status, initial, seats }) => {
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = () => {
     if (status === "Available") {
+      dispatch(updateTable({tableNo : name}))
       navigate(`/menu`);
     }
   }
@@ -14,7 +18,7 @@ const TableCard = ( { id, name, status, initial, seats }) => {
 
   return (
     <div
-    onClick={handleClick}
+    onClick={() => handleClick(name)}
     key={id} 
     className="w-[19%] mb-3 bg-[#262626] rounded-lg p-6 cursor-pointer hover:scale-105 transition-transform">
       <div className="flex items-center justify-between px-2">
