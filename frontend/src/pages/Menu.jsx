@@ -44,11 +44,11 @@ const Menu = () => {
         <hr className="border-[#333333] border-t-2" />
 
         {/* Cart Items */}
-        <h1 className="text-lg text-[#e4e4e4] font-semibold tracking-wide px-4 py-2">Order Details</h1>
+
         <CartInfo />
-        <CartInfo />
+
         {/* Bills */}
-        <Bill />
+        <Bill/>
       </div>
 
 

@@ -1,7 +1,7 @@
 
 const Bill = () => {
     return (
-        <section>
+        <section className="mt-auto">
             <div className="flex items-center justify-between px-5 mt-2">
                 <p className="text-xs text-[#ababab] font-medium mt-2">Items (4)</p>
                 <h1 className="text-[#f5f5f5] font-bold">$240</h1>

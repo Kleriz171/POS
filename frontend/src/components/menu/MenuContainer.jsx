@@ -2,10 +2,25 @@ import { Circle, CircleCheck, ShoppingCart } from "lucide-react";
 import { menus } from "../../constants";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addItems } from "../../redux/slices/cartSlice"
 
 const MenuContainer = () => {
     const [selectedMenu, setSelectedMenu] = useState(menus[0]);
     const [counts, setCounts] = useState({});
+    const dispatch = useDispatch()
+
+    const handleAddToCart = (item) =>{
+        if (!counts[item.id]) return;
+
+        const {name, price} = item;
+        const newObj = {id: new Date(), name, pricePerItem: price, quantity: counts[item.id], price: price * counts[item.id]}
+
+        dispatch(addItems(newObj))
+        setCounts((prevCounts)=> ({
+            ...prevCounts, [item.id]: (0)
+        }))
+    }
 
     const increment = (id) => {
         setCounts((prevCounts) => ({
@@ -29,7 +44,7 @@ const MenuContainer = () => {
                         return (
                             <div
                                 key={menu.id}
-                                className={`flex flex-col items-start justify-between p-4 rounded-lg h-[100px] cursor-pointer 
+                                className={`flex flex-col items-start justify-between p-4 rounded-lg h-25 cursor-pointer 
                             ${menu.bgColor} hover:scale-105 transform transition-all duration-200`}
                                 onClick={() => {
                                     setSelectedMenu(menu)
@@ -55,30 +70,32 @@ const MenuContainer = () => {
             <div className="grid grid-cols-4 gap-4 px-10 py-4 w-full">
                 {
 
-                    selectedMenu.items.map((menu) => {
+                    selectedMenu.items.map((item) => {
                         return (
                             <div
-                                key={menu.id}
-                                className={`flex flex-col items-start justify-between p-4 rounded-lg h-[150px] bg-[#1a1a1a]
+                                key={item.id}
+                                className={`flex flex-col items-start justify-between p-4 rounded-lg h-37.5 bg-[#1a1a1a]
                                 hover:scale-105 transform transition-all duration-200 hover:bg-[#2a2a2a] z-20 `}
                             >
                                 <div className="flex items-start justify-between w-full">
-                                    <h1 className="text-[#f5f5f5] text-lg font-semibold">{menu.name}</h1>
-                                    <button className="text-green-500  rounded-lg cursor-pointer bg-[#2e4a40] p-2" >
+                                    <h1 className="text-[#f5f5f5] text-lg font-semibold">{item.name}</h1>
+                                    <button 
+                                    className="text-green-500  rounded-lg cursor-pointer bg-[#2e4a40] p-2" 
+                                    onClick={()=>handleAddToCart(item)}>
                                         <FaShoppingCart size={20} />
                                     </button>
                                 </div>
                                 <div className="items-center flex justify-between w-full flex-row">
                                     <p className="text-[#f5f5f5] text-l font-bold">
-                                        $ {menu.price}
+                                        $ {item.price}
                                     </p>
                                     <div className='flex items-center justify-between rounded-lg py-3 px-4 bg-[#1f1f1f] gap-6'>
                                         <button
-                                            onClick={() => decrement(menu.id)}
+                                            onClick={() => decrement(item.id)}
                                             className='text-yellow-500 hover:text-yellow-800 text-2xl cursor-pointer'>&minus;</button>
-                                        <span className='text-white'>{counts[menu.id] || 0}</span>
+                                        <span className='text-white'>{counts[item.id] || 0}</span>
                                         <button
-                                            onClick={() => increment(menu.id)}
+                                            onClick={() => increment(item.id)}
                                             className='text-yellow-500 hover:text-yellow-800 text-2xl cursor-pointer'>+</button>
                                     </div>
                                 </div>
