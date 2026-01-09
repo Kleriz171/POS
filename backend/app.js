@@ -6,7 +6,8 @@ const createHttpError = require("http-errors")
 const app = express();
 
 //routes
-const userRoutes = require("./routes/userRoute")
+const userRoutes = require("./routes/userRoute");
+const cookieParser = require("cookie-parser");
 
 const PORT = config.PORT;
 //db
@@ -14,13 +15,11 @@ connectDB()
 
 //middlewares
 app.use(express.json())
+app.use(cookieParser())
 
 //routes
 app.get("/", (req, res)=>{
 
-    const err = createHttpError(404, "smth went wrong")
-    throw err
-    res.json({message: "Hello from POS server"})
 })
 app.use("/api/user", userRoutes)
 

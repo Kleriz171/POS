@@ -1,5 +1,7 @@
 const config = require("../config/config")
 const createHttpError = require("http-errors");
+const jwt = require("jsonwebtoken")
+const User = require("../models/userModel")
 
 
 const isVerified = async (req, res, next) =>{
@@ -24,8 +26,8 @@ const isVerified = async (req, res, next) =>{
         next()
 
     }catch(error){
-        const err = create(401, "Invalid Token!")
-        next(error)
+        const err = createHttpError(401, "Invalid Token!")
+        next(err)
     }
 }
 
