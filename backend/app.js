@@ -12,6 +12,9 @@ const PORT = config.PORT;
 //db
 connectDB()
 
+//middlewares
+app.use(express.json())
+
 //routes
 app.get("/", (req, res)=>{
 
