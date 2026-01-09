@@ -9,12 +9,12 @@ const register = async (req, res, next) => {
         const { name, phone, email, password, role } = req.body
         if (!name || !phone || !email || !password || !role) {
             const error = createHttpError(400, "All fields must be filled")
-            next(error)
+            return next(error)
         }
         const isUserPresent = await User.findOne({ email })
         if (isUserPresent) {
             const error = createHttpError(400, "User already exists")
-            next(error)
+            return next(error)
         }
 
         const user = { name, phone, email, password, role };
@@ -25,7 +25,7 @@ const register = async (req, res, next) => {
 
 
     } catch (error) {
-        next(error)
+         next(error)
     }
 
 
@@ -38,18 +38,18 @@ const login = async (req, res, next) => {
 
         if (!email || !password) {
             const error = createHttpError(400, "all fields are required!")
-            next(error)
+            return next(error)
         }
         const isUser = await User.findOne({ email })
         if (!isUser) {
             const error = createHttpError(401, "Invalid Credentials")
-            next(error)
+            return next(error)
         }
 
         const isMatch = await bcrypt.compare(password, isUser.password)
         if (!isMatch) {
             const error = createHttpError(401, "Invalid Credentials")
-            next(error)
+            return next(error)
         }
 
         const accesToken = jwt.sign({_id: isUser._id}, config.accesTokenSecret, {
@@ -71,5 +71,8 @@ const login = async (req, res, next) => {
     }
 }
 
+const getUserData = async (req,res,next)=>{
 
-module.exports = { register, login }
+}
+
+module.exports = { register, login,getUserData }
