@@ -7,7 +7,7 @@ const app = express();
 
 //routes
 const userRoutes = require("./routes/userRoute");
-const cookieParser = require("cookie-parser");
+const orderRoute = require("./routes/orderRoute")
 
 const PORT = config.PORT;
 //db
@@ -16,13 +16,14 @@ connectDB()
 //middlewares
 app.use(express.json())
 app.use(cookieParser())
+const cookieParser = require("cookie-parser");
 
 //routes
 app.get("/", (req, res)=>{
 
 })
 app.use("/api/user", userRoutes)
-
+app.use("/api/orders", orderRoute)
 
 //error handler
 app.use(globalErrorHandler)
