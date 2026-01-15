@@ -52,11 +52,11 @@ const login = async (req, res, next) => {
             return next(error)
         }
 
-        const accesToken = jwt.sign({_id: isUser._id}, config.accesTokenSecret, {
+        const accessToken = jwt.sign({_id: isUser._id}, config.accessTokenSecret, {
             expiresIn: "20d"
         })
 
-        res.cookie('accesToken', accesToken, {
+        res.cookie('accessToken', accessToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
             sameSite: 'none',

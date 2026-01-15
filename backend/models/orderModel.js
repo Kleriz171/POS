@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const orderSchema = new mongoose.Schema({
-    custoemrDetails: {
+    customerDetails: {
         name: {type:String, required: true},
         phone: {type:String, required: true},
         guests: {type:Number, required: true},
@@ -17,7 +17,7 @@ const orderSchema = new mongoose.Schema({
     bills: {
         total: {type: Number, required: true},
         tax: {type: Number, required: true},
-        totalWithTax: {type:Numver, required:true}
+        totalWithTax: {type:Number, required:true}
     },
     items: []
 }, {timestamps: true});

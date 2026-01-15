@@ -4,6 +4,8 @@ const connectDB = require("./config/database");
 const globalErrorHandler = require("./middleware/globalErrorHandler");
 const createHttpError = require("http-errors")
 const app = express();
+const cookieParser = require("cookie-parser");
+
 
 //routes
 const userRoutes = require("./routes/userRoute");
@@ -16,7 +18,6 @@ connectDB()
 //middlewares
 app.use(express.json())
 app.use(cookieParser())
-const cookieParser = require("cookie-parser");
 
 //routes
 app.get("/", (req, res)=>{
