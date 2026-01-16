@@ -9,7 +9,8 @@ const cookieParser = require("cookie-parser");
 
 //routes
 const userRoutes = require("./routes/userRoute");
-const orderRoute = require("./routes/orderRoute")
+const orderRoutes = require("./routes/orderRoute")
+const tableRoutes = require("./routes/tableRoute")
 
 const PORT = config.PORT;
 //db
@@ -24,7 +25,8 @@ app.get("/", (req, res)=>{
 
 })
 app.use("/api/user", userRoutes)
-app.use("/api/orders", orderRoute)
+app.use("/api/orders", orderRoutes)
+app.use("/api/table", tableRoutes)
 
 //error handler
 app.use(globalErrorHandler)
