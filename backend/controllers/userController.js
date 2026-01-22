@@ -25,7 +25,7 @@ const register = async (req, res, next) => {
 
 
     } catch (error) {
-         next(error)
+        next(error)
     }
 
 
@@ -52,7 +52,7 @@ const login = async (req, res, next) => {
             return next(error)
         }
 
-        const accessToken = jwt.sign({_id: isUser._id}, config.accessTokenSecret, {
+        const accessToken = jwt.sign({ _id: isUser._id }, config.accessTokenSecret, {
             expiresIn: "20d"
         })
 
@@ -62,7 +62,8 @@ const login = async (req, res, next) => {
             sameSite: 'none',
             secure: true
         })
-        res.status(200).json({succes:true, message: "User login successfully!",
+        res.status(200).json({
+            succes: true, message: "User login successfully!",
             data: isUser
         })
 
@@ -71,15 +72,24 @@ const login = async (req, res, next) => {
     }
 }
 
-const getUserData = async (req,res,next)=>{
-    try{
+const getUserData = async (req, res, next) => {
+    try {
 
         const user = await User.findById(req.user._id)
-        res.status(200).json({success: true, data:user})
+        res.status(200).json({ success: true, data: user })
 
-    }catch(error){
+    } catch (error) {
         next(error)
     }
 }
 
-module.exports = { register, login,getUserData }
+const getUsers = async (req, res, next) => {
+    try {
+        const user = await User.find()
+        res.status(200).json({ success: true, data: user })
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports = { register, login, getUserData, getUsers }
