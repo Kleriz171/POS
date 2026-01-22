@@ -1,5 +1,6 @@
 import restaurant from "../assets/images/restaurant.jpg"
 import logo from "../assets/images/logo.png"
+import Register from "../components/auth/Register";
 
 
 function Auth() {
@@ -31,7 +32,7 @@ function Auth() {
                 </h2>
 
                 {/* Components */}
-                {/* Register */}
+                <Register/>
 
                 <div className="flex justify-center mt-6">
                     <p className="text-sm text-[#ababab]">
