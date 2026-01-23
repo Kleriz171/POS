@@ -56,6 +56,29 @@ const Register = () => {
             />
           </div>
         </div>
+        <div>
+          <label className="block text-[#ababab] mb-2 mt-3 text-sm font-medium">Chose your role</label>
+          <div className="flex items-center gap-3">
+            {["Waiter", "Cashier", "Admin"].map((role) => {
+              return (
+                <button
+                  key={role}
+                  type="button"
+                  className="bg-[#1f1f1f] px-4 py-3 w-full rounded-lg text-[#ababab] cursor-pointer"
+                >
+                  <p >{role}</p>
+                </button>
+              )
+            })}
+            
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="w-full mt-6 py-3 text-lg rounded-lg bg-yellow-400 text-gray-900 font-bold"
+        >
+          Sign Up
+        </button>
       </form>
     </div>
   );
