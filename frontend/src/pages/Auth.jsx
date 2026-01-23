@@ -2,9 +2,16 @@ import restaurant from "../assets/images/restaurant.jpg"
 import logo from "../assets/images/logo.png"
 import Register from "../components/auth/Register";
 import Login from "../components/auth/Login";
+import { useState } from "react";
 
 
 function Auth() {
+
+    const [isRegister, setRegister] = useState(false)
+
+    const handleClick = () => {
+        setRegister(!isRegister)
+    }
     return (
         <div className="flex min-h-screen w-full">
             {/* Left section */}
@@ -29,19 +36,21 @@ function Auth() {
                     <h1 className="text-lg font-semibold text-[#f5f5f5]">Restro</h1>
                 </div>
                 <h2 className="text-4xl text-center mt-10 font-semibold text-yellow-400 mb-10">
-                    Employee Registration
+                    {isRegister ? "Employee Sign In" : "Employee Registration"}
                 </h2>
 
-                {/* Components */}
-                {/* <Register/> */}
-                <Login/>
+                {isRegister ? <Login /> : <Register />}
+
 
                 <div className="flex justify-center mt-6">
                     <p className="text-sm text-[#ababab]">
-                        Already have an account 
-                        <a className="pl-1 text-yellow-400 font-semibold hover:underline" href="#">
-                            Sign in
-                        </a>
+                        {isRegister ? "Don't have an account? " : "Already have an account? "}
+                        <span
+                            className="pl-1 text-yellow-400 font-semibold hover:underline cursor-pointer"
+                            onClick={handleClick}
+                        >
+                            {isRegister ? "Sign up" : "Sign in"}
+                        </span>
                     </p>
                 </div>
             </div>

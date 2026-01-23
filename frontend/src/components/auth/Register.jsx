@@ -1,8 +1,30 @@
+import { useState } from "react";
 
 const Register = () => {
+
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    role: ""
+  })
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  const handleSumbit = (e) => {
+    e.preventDefault()
+    console.log(formData)
+  }
+  const handleRoleSelection = (selectedRole) => {
+    setFormData({ ...formData, role: selectedRole })
+  }
   return (
     <div>
-      <form>
+      <form onSubmit={handleSumbit}>
         <div className="pt-2">
           <label className="block text-[#ababab] mb-2 text-sm font-medium">
             Employee Name
@@ -10,6 +32,8 @@ const Register = () => {
           <div className="flex items-center rounded-lg p-5 px-4 bg-[#1f1f1f]">
             <input type="text"
               name="name"
+              value={formData.name}
+              onChange={handleChange}
               placeholder="Enter employee name"
               className="bg-transparent flex-1 text-white focus:outline-none"
               required
@@ -23,6 +47,8 @@ const Register = () => {
           <div className="flex items-center rounded-lg p-5 px-4 bg-[#1f1f1f]">
             <input type="email"
               name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Enter employee email"
               className="bg-transparent flex-1 text-white focus:outline-none"
               required
@@ -36,6 +62,8 @@ const Register = () => {
           <div className="flex items-center rounded-lg p-5 px-4 bg-[#1f1f1f]">
             <input type="number"
               name="phone"
+              value={formData.phone}
+              onChange={handleChange}
               placeholder="Enter employee phone number"
               className="bg-transparent flex-1 text-white focus:outline-none [appearance:textfield] 
               [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -50,6 +78,8 @@ const Register = () => {
           <div className="flex items-center rounded-lg p-5 px-4 bg-[#1f1f1f]">
             <input type="password"
               name="password"
+              value={formData.password}
+              onChange={handleChange}
               placeholder="Enter password"
               className="bg-transparent flex-1 text-white focus:outline-none"
               required
@@ -64,18 +94,20 @@ const Register = () => {
                 <button
                   key={role}
                   type="button"
-                  className="bg-[#1f1f1f] px-4 py-3 w-full rounded-lg text-[#ababab] cursor-pointer"
+                  onClick={() => handleRoleSelection(role)}
+                  className={`px-4 py-3 w-full rounded-lg cursor-pointer ${formData.role === role ? "bg-yellow-400 text-gray-900 " : "bg-[#1f1f1f] text-[#ababab]"
+                    }`}
                 >
                   <p >{role}</p>
                 </button>
               )
             })}
-            
+
           </div>
         </div>
         <button
           type="submit"
-          className="w-full mt-6 py-3 text-lg rounded-lg bg-yellow-400 text-gray-900 font-bold"
+          className="cursor-pointer w-full mt-6 py-3 text-lg rounded-lg bg-yellow-400 text-gray-900 font-bold"
         >
           Sign Up
         </button>
