@@ -20,7 +20,7 @@ const userSlice = createSlice({
             state.email = email
             state.phone = phone
             state.role = role
-            state.isAuth = isAuth
+            state.isAuth = true
         },
 
         removeUser: (state) => {
