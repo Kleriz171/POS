@@ -91,4 +91,15 @@ const getUsers = async (req, res, next) => {
     }
 }
 
-module.exports = { register, login, getUserData, getUsers }
+const logOut = async (req, res, next) =>{
+    try{
+
+        res.clearCookie('accessToken')
+        res.status(200).json({ success: true, message: "User logout successfully"})
+
+    }catch(error){
+        next(error)
+    }
+}
+
+module.exports = { register, login, getUserData, getUsers, logOut }
