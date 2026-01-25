@@ -7,10 +7,10 @@ import { useState } from "react";
 
 function Auth() {
 
-    const [isRegister, setRegister] = useState(false)
+    const [isRegister, setIsRegister] = useState(true)
 
     const handleClick = () => {
-        setRegister(!isRegister)
+        setIsRegister(!isRegister)
     }
     return (
         <div className="flex min-h-screen w-full">
@@ -39,7 +39,7 @@ function Auth() {
                     {isRegister ? "Employee Sign In" : "Employee Registration"}
                 </h2>
 
-                {isRegister ? <Login /> : <Register />}
+                {isRegister ? <Login /> : <Register setIsRegister={setIsRegister} />}
 
 
                 <div className="flex justify-center mt-6">

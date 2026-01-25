@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { register } from "../../https";
+import { useMutation } from "@tanstack/react-query";
+import { enqueueSnackbar } from "notistack"
 
-const Register = () => {
+const Register = ({setIsRegister}) => {
 
 
   const [formData, setFormData] = useState({
@@ -17,11 +20,32 @@ const Register = () => {
 
   const handleSumbit = (e) => {
     e.preventDefault()
-    console.log(formData)
+    registerMutation.mutate(formData)
   }
   const handleRoleSelection = (selectedRole) => {
     setFormData({ ...formData, role: selectedRole })
   }
+  const registerMutation = useMutation({
+    mutationFn: (reqData) => register(reqData),
+    onSuccess: (res) => {
+      const { data } = res;
+      enqueueSnackbar(data.message, { variant: "success" })
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        role: ""
+      })
+      setTimeout(()=>{
+        setIsRegister(true)
+      },1500)
+    },
+    onError: (error) => {
+      const { response } = error
+      enqueueSnackbar(response.data.message, { variant: "error" })
+    }
+  })
   return (
     <div>
       <form onSubmit={handleSumbit}>
