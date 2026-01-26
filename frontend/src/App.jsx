@@ -6,6 +6,7 @@ import BottomNav from "./components/shared/BottomNav"
 import { useSelector } from "react-redux"
 import useLoadData from "./hooks/useLoadData"
 import FullScreenLoader from "./components/shared/FullScreenLoader"
+import Dashboard from "./pages/Dashboard"
 
 function Layout() {
 
@@ -26,6 +27,7 @@ function Layout() {
           <Route path="/orders" element={<ProtectedRoutes><Orders /></ProtectedRoutes>} />
           <Route path="/tables" element={<ProtectedRoutes><Tables /></ProtectedRoutes>} />
           <Route path="/menu" element={<ProtectedRoutes><Menu /></ProtectedRoutes>} />
+          <Route path="/dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>
         {!hideHeaderRoutes.includes(location.pathname) && <BottomNav />}

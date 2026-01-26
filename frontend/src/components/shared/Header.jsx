@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query"
 import { logout } from "../../https"
 import { removeUser } from "../../redux/slices/userSlice"
 import { useNavigate } from "react-router-dom"
+import { MdDashboard } from "react-icons/md"
 
 const Header = () => {
 
@@ -46,8 +47,12 @@ const Header = () => {
             </div>
             {/* User Profile */}
             <div className="flex items-center gap-4">
+                {userData.role === "Admin" && (
+                    <div className="bg-[#1f1f1f] rounded-[15px] p-3 cursor-pointer">
+                        <MdDashboard onClick={() => navigate("/dashboard")} className="text-white text-2xl" />
+                    </div >)}
                 <div className="bg-[#1f1f1f] rounded-[15px] p-3 cursor-pointer">
-                    <Bell className="stroke-white text-2xl" />
+                    <Bell className="text-white text-2xl" />
                 </div >
                 <div className="bg-[#1f1f1f] rounded-[15px] p-3 cursor-pointer flex items-center gap-3">
                     <User className="stroke-white text-2xl" />
