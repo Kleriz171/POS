@@ -32,7 +32,7 @@ const Header = () => {
 
         <header className="flex justify-between items-center py-4 px-8 bg-[#1a1a1a]">
             {/* Logo */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={()=>navigate("/")}>
                 <UtensilsCrossed className="stroke-white w-6 h-6" />
                 <h1 className="text-white text-xl">POS</h1>
             </div>
