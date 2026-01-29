@@ -8,17 +8,17 @@ const addTable = async (req, res, next) => {
 
         if (!tableNo) {
             const error = createHttpError(400, "Please provide table Number")
-            return error;
+            return next(error);
         }
         if (!seats) {
             const error = createHttpError(400, "Please provide table seats")
-            return error;
+            return next(error);
         }
 
         const isTablePresent = await Table.findOne({ tableNo })
         if (isTablePresent) {
             const error = createHttpError(400, "Table already present")
-            return error;
+            return next(error);
         }
 
         const newTable = new Table({ tableNo, seats })

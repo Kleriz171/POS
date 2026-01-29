@@ -2,6 +2,8 @@ import { easeInOut, motion } from "motion/react"
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io"
 import { useMutation } from "@tanstack/react-query"
+import { addTable } from "../../https";
+import { enqueueSnackbar } from "notistack";
 
 const Modal = ({ setIsTableModalOpen }) => {
 
@@ -18,15 +20,27 @@ const Modal = ({ setIsTableModalOpen }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(tableData)
+        tableMutation.mutate(tableData)
     }
 
     const handleCloseModal = () => {
         setIsTableModalOpen(false)
     }
 
-    const tableMutation = useMutation(
+    const tableMutation = useMutation({
+        mutationFn: (reqData) => addTable(reqData),
+        onSuccess: (data) => {
+            setIsTableModalOpen(false)
+            console.log(data)
+            const { data: mesazhi } = data;
+            enqueueSnackbar(mesazhi.message, { variant: "success" })
+        },
+        onError: (error) => {
+            const { response } = error
+            enqueueSnackbar(response.data.message, { variant: "error" })
+        }
 
-    )
+    })
     return (
 
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center ">
