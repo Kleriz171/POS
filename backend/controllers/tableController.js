@@ -4,10 +4,14 @@ const mongoose = require("mongoose")
 
 const addTable = async (req, res, next) => {
     try {
-        const { tableNo } = req.body
+        const { tableNo, seats } = req.body
 
         if (!tableNo) {
             const error = createHttpError(400, "Please provide table Number")
+            return error;
+        }
+        if (!seats) {
+            const error = createHttpError(400, "Please provide table seats")
             return error;
         }
 
@@ -17,7 +21,7 @@ const addTable = async (req, res, next) => {
             return error;
         }
 
-        const newTable = new Table({ tableNo })
+        const newTable = new Table({ tableNo, seats })
         await newTable.save()
 
         res.status(201).json({ success: true, message: "Table added!", data: newTable })
