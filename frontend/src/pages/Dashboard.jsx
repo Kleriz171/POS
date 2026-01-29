@@ -14,6 +14,7 @@ const tabs = ["Metrics", "Orders", "Payment"]
 
 const Dashboard = () => {
 
+    const [isModalOpen, setIsModal] = useState(false)
     const [activeTab, setActiveTab] = useState("Metrics")
 
     return (
@@ -44,6 +45,8 @@ const Dashboard = () => {
             </div>
             {activeTab==="Metrics" && <Metrics/>}
             {activeTab==="Orders" && <RecentOrders/>}
+
+        {isModalOpen}
         </div>
     );
 };
