@@ -46,7 +46,12 @@ const Tables = () => {
             <div className="px-10 pt-4 pb-22 flex flex-wrap justify-around gap-4 overflow-y-auto scrollbar-hide h-[calc(100vh-11.5rem)] [&::-webkit-scrollbar]:hidden scroll-smooth">
                 {
                     resData?.data.data.map((table) => {
-                            return <TableCard id={table._id} name={table.tableNo} status={table.status} initial ={"AM"} seats={table.seats}  />;
+                            return <TableCard 
+                            id={table._id} 
+                            name={table.tableNo} 
+                            status={table.status} 
+                            initial ={table?.currentOrder?.customerDetails.name} 
+                            seats={table.seats}  />;
                 }
                 )}
             </div> 
