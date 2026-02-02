@@ -12,6 +12,7 @@ const cors = require("cors")
 const userRoutes = require("./routes/userRoute");
 const orderRoutes = require("./routes/orderRoute")
 const tableRoutes = require("./routes/tableRoute")
+const paymentRoutes = require("./routes/paymentRoute")
 
 const PORT = config.PORT;
 //db
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 app.use("/api/user", userRoutes)
 app.use("/api/orders", orderRoutes)
 app.use("/api/table", tableRoutes)
+app.use("/api/payment", paymentRoutes)
 
 //error handler
 app.use(globalErrorHandler)
