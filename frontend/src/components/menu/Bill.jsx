@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { getTotalPrice } from "../../redux/slices/cartSlice";
+import { useState } from "react";
+import {enqueueSnackbar} from "notistack"
 
 const Bill = () => {
 
@@ -8,6 +10,16 @@ const Bill = () => {
     const taxRate = 5;
     const tax = (total * taxRate) /100
     const totalAfterTax = total + tax
+
+    const [paymentMethod, setPaymentMethod] = useState()
+
+    const handlePlaceOrder = async () =>{
+        if(!paymentMethod){
+            enqueueSnackbar("Please select a payment method!", {variant:"warning"})
+
+            return
+        }
+    }
 
     return (
         <section className="mt-auto">
@@ -24,10 +36,14 @@ const Bill = () => {
                 <h1 className="text-[#f5f5f5] font-bold">${totalAfterTax}</h1>
             </div>
             <div className="flex items-center gap-3 px-5 mt-4">
-                <button className="bg-[#1f1f1f] w-full text-[#ababab] px-4 py-3 rounded-lg font-semibold cursor-pointer">
+                <button 
+                onClick={() => setPaymentMethod("Cash")} 
+                className={`bg-[#1f1f1f] w-full text-[#ababab] px-4 py-3 rounded-lg font-semibold cursor-pointer ${paymentMethod === "Cash" && "bg-[#383737]"}`}>
                     Cash
                 </button>
-                <button className="bg-[#1f1f1f] w-full text-[#ababab] px-4 py-3 rounded-lg font-semibold cursor-pointer">
+                <button 
+                onClick={() => setPaymentMethod("Online")} 
+                className={`bg-[#1f1f1f] w-full text-[#ababab] px-4 py-3 rounded-lg font-semibold cursor-pointer ${paymentMethod === "Online" && "bg-[#383737]"}`}>
                     Online
                 </button>
             </div>
@@ -35,7 +51,9 @@ const Bill = () => {
                 <button className="bg-[#025cca] w-full text-[#f5f5f5] px-4 py-3 rounded-lg font-semibold cursor-pointer text-lg">
                     Print receipt
                 </button>
-                <button className="bg-[#f6b100] w-full text-[#1f1f1f] px-4 py-3 rounded-lg font-semibold cursor-pointer text-lg">
+                <button 
+                onClick={handlePlaceOrder}
+                className="bg-[#f6b100] w-full text-[#1f1f1f] px-4 py-3 rounded-lg font-semibold cursor-pointer text-lg">
                     Place Order
                 </button>
             </div>
