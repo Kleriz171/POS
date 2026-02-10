@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
   page: {
     padding: 20,
     backgroundColor: "#ffffff",
+    display: "flex",
+    alignContent: "center",
+    
   },
   section: {
     marginBottom: 10,
@@ -29,21 +32,23 @@ const MyDocument = ({ cartData, total, tax, totalAfterTax }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <Text>Receipt</Text>
+      
       <View style={styles.section}>
         {cartData.map((item, index) => (
           <Text key={index} style={styles.item}>
-            {item.name} - ${item.price}
+            {item.name} - ${item.price.toFixed(2)}
           </Text>
         ))}
       </View>
-      <Text>Total: ${total}</Text>
-      <Text>Tax: ${tax}</Text>
-      <Text>Final Total: ${totalAfterTax}</Text>
+      <Text>Total: ${total.toFixed(2)}</Text>
+      <Text>Tax: ${tax.toFixed(2)}</Text>
+      <Text>Final Total: ${totalAfterTax.toFixed(2)}</Text>
     </Page>
   </Document>
 );
 
 const Bill = () => {
+  const customerData = useSelector((state)=>state.customer)
   const cartData = useSelector((state) => state.cart);
   const total = useSelector(getTotalPrice);
   const taxRate = 5;
@@ -61,10 +66,27 @@ const Bill = () => {
       return;
     }
 
-    // Place order logic here
-    enqueueSnackbar("Order placed successfully!", { variant: "success" });
+    const orderData = {
+      customerDetails: {
+        name: customerData.customerName,
+        phone: customerData.customerPhone,
+        guests: customerData.guests,
+      },
+      orderStatus: "In Progress",
+      bills:{
+        total: total,
+        tax: tax,
+        totalWithTax: totalAfterTax
+      },
+      items: cartData,
+      table: customerData.table
+    }
+
+    // TODO: Send orderData to backend/database 
+    console.log("Order Data:", orderData);
     
-    // Optionally clear cart, navigate, etc.
+    enqueueSnackbar("Order placed successfully!", { variant: "success" });
+    // Optionally clear cart, navigate, etc. pak me von
   };
 
   const handlePrintReceipt = () => {
@@ -94,25 +116,25 @@ const Bill = () => {
         </div>
       )}
 
-      <div className="flex justify-between items-center mb-4 pb-4 border-b-2 border-gray-600">
+      <div className="flex justify-between items-center pt-2 mb-2 text-white px-4">
         <span>Items ({cartData.length})</span>
-        <span className="font-semibold">${total}</span>
+        <span className="font-semibold">${total.toFixed(2)}</span>
       </div>
 
-      <div className="flex justify-between items-center mb-4 pb-4 border-b-2 border-gray-600">
+      <div className="flex justify-between items-center mb-2 text-white px-4">
         <span>Tax ({taxRate}%)</span>
-        <span className="font-semibold">${tax}</span>
+        <span className="font-semibold">${tax.toFixed(2)}</span>
       </div>
 
-      <div className="flex justify-between items-center mb-4 pb-4 border-b-2 border-gray-600">
+      <div className="flex justify-between items-center mb-2 text-white px-4">
         <span className="font-bold">Total after tax</span>
-        <span className="font-bold">${totalAfterTax}</span>
+        <span className="font-bold">${totalAfterTax.toFixed(2)}</span>
       </div>
 
-      <div className="flex gap-2 mb-4">
+      <div className="flex gap-2 mb-4 px-4">
         <button
           onClick={() => setPaymentMethod("Cash")}
-          className={`bg-[#1f1f1f] w-full px-4 py-3 rounded-lg font-semibold ${
+          className={`bg-[#1f1f1f] w-full px-4 py-3 rounded-lg font-semibold text-white ${
             paymentMethod === "Cash" && "bg-[#383737]"
           }`}
         >
@@ -120,7 +142,7 @@ const Bill = () => {
         </button>
         <button
           onClick={() => setPaymentMethod("Online")}
-          className={`bg-[#1f1f1f] w-full px-4 py-3 rounded-lg font-semibold ${
+          className={`bg-[#1f1f1f] w-full px-4 py-3 rounded-lg font-semibold text-white ${
             paymentMethod === "Online" && "bg-[#383737]"
           }`}
         >
@@ -128,16 +150,16 @@ const Bill = () => {
         </button>
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 px-4">
         <button
           onClick={handlePrintReceipt}
-          className="bg-blue-600 w-full px-4 py-3 rounded-lg font-semibold"
+          className="bg-orange-500 w-full px-4 py-3 rounded-lg font-semibold"
         >
           Print receipt
         </button>
         <button
           onClick={handlePlaceOrder}
-          className="bg-green-600 w-full px-4 py-3 rounded-lg font-semibold"
+          className="bg-blue-600 w-full px-4 py-3 rounded-lg font-semibold"
         >
           Place Order
         </button>

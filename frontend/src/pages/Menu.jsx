@@ -13,7 +13,7 @@ const Menu = () => {
   return (
     <section className="bg-[#1f1f1f] flex gap-3 h-[calc(100vh-6.5rem)] overflow-hidden">
       {/* Left Div */}
-      <div className="flex-3 ">
+      <div className="flex-3">
         <div className=" flex items-center justify-between px-10 py-4">
           <div className="flex items-center gap-4">
             <BackButton />
@@ -28,7 +28,9 @@ const Menu = () => {
                 <h1 className="text-white text-l font-bold">
                   {customerData.customerName}
                 </h1>
-                <p className="text-[#929292fe] text-m">{customerData.tableNo}</p>
+                <p className="text-[#929292fe] text-m">
+                  Table: {customerData.table?.tableNo || 'N/A'}
+                </p>
               </div>
             </div>
           </div>
@@ -44,16 +46,12 @@ const Menu = () => {
         <hr className="border-[#333333] border-t-2" />
 
         {/* Cart Items */}
-
         <CartInfo />
         <hr className="border-[#333333] border-t-2" />
 
         {/* Bills */}
         <Bill />
       </div>
-
-
-
     </section>
   );
 };
