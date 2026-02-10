@@ -19,7 +19,7 @@ const OrderCard = () => {
                             <Check className="inline mr-2" /> Ready
                         </p>
                         <p className="text-[#ababab] text-sm">
-                            <button className="inline h-[15px] w-[15px] border-r-[50%] rounded-lg bg-green-600 mr-2" /> Ready to serve
+                            <button className="inline h-3.75 w-3.75 border-r-[50%] rounded-lg bg-green-600 mr-2" /> Ready to serve
                         </p>
                     </div>
                 </div>
@@ -29,7 +29,7 @@ const OrderCard = () => {
                 <p>8 Items</p>
             </div>
             <hr className="w-full mt-4 border-t-2 border-gray-500 text-[#f5f5f5]"/>
-            <div flex className="flex justify-between items-center mt-4">
+            <div className="flex justify-between items-center mt-4">
                 <h1 className="text-[#f5f5f5] text-xl font-bold">Total</h1>
                 <p className="text-[#f5f5f5] text-lg font-semibold">$120</p>
             </div>

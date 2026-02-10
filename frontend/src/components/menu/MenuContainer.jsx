@@ -10,15 +10,22 @@ const MenuContainer = () => {
     const [counts, setCounts] = useState({});
     const dispatch = useDispatch()
 
-    const handleAddToCart = (item) =>{
+    const handleAddToCart = (item) => {
         if (!counts[item.id]) return;
 
-        const {name, price} = item;
-        const newObj = {id: new Date(), name, pricePerItem: price, quantity: counts[item.id], price: price * counts[item.id]}
+        const { name, price } = item;
+        const newObj = {
+            id: `${Date.now()}`, // Convert to string - FIXED!
+            name, 
+            pricePerItem: price, 
+            quantity: counts[item.id], 
+            price: price * counts[item.id]
+        }
 
         dispatch(addItems(newObj))
-        setCounts((prevCounts)=> ({
-            ...prevCounts, [item.id]: (0)
+        setCounts((prevCounts) => ({
+            ...prevCounts, 
+            [item.id]: 0
         }))
     }
 
@@ -28,12 +35,14 @@ const MenuContainer = () => {
             [id]: (prevCounts[id] || 0) + 1,
         }));
     }
+    
     const decrement = (id) => {
         setCounts((prevCounts) => ({
             ...prevCounts,
             [id]: Math.max((prevCounts[id] || 0) - 1, 0),
         }));
     }
+
 
     return (
 

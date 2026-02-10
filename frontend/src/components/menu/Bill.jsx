@@ -1,7 +1,10 @@
-import { useSelector } from "react-redux";
-import { getTotalPrice } from "../../redux/slices/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getTotalPrice, removeAllItems } from "../../redux/slices/cartSlice";
 import { useState } from "react";
 import { enqueueSnackbar } from "notistack";
+import { useMutation } from "@tanstack/react-query"
+import { addOrder, updateTable } from "../../https/index"
+import { removeCustomer } from "../../redux/slices/customerSlice";
 import {
   PDFViewer,
   Page,
@@ -17,7 +20,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     display: "flex",
     alignContent: "center",
-    
   },
   section: {
     marginBottom: 10,
@@ -32,7 +34,7 @@ const MyDocument = ({ cartData, total, tax, totalAfterTax }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <Text>Receipt</Text>
-      
+
       <View style={styles.section}>
         {cartData.map((item, index) => (
           <Text key={index} style={styles.item}>
@@ -48,7 +50,9 @@ const MyDocument = ({ cartData, total, tax, totalAfterTax }) => (
 );
 
 const Bill = () => {
-  const customerData = useSelector((state)=>state.customer)
+  const dispatch = useDispatch()
+
+  const customerData = useSelector((state) => state.customer)
   const cartData = useSelector((state) => state.cart);
   const total = useSelector(getTotalPrice);
   const taxRate = 5;
@@ -58,9 +62,71 @@ const Bill = () => {
   const [paymentMethod, setPaymentMethod] = useState();
   const [showReceipt, setShowReceipt] = useState(false);
 
+  const tableUpdateMutation = useMutation({
+    mutationFn: (reqData) => updateTable(reqData),
+    onSuccess: (resData) => {
+      console.log(resData)
+      dispatch(removeCustomer())
+      dispatch(removeAllItems()) // FIXED: was removeItems()
+    },
+    onError: (error) => {
+      console.log(error)
+      enqueueSnackbar("Failed to update table", { variant: "error" })
+    }
+  })
+
+  const ordermutation = useMutation({
+    mutationFn: (reqData) => addOrder(reqData),
+    onSuccess: (resData) => {
+      console.log("Order response:", resData)
+      const order = resData.data.order;
+      
+      // FIXED: Extract order ID from the order object
+      const orderId = order._id;
+      
+      if (!orderId) {
+        console.error("No order ID received:", order)
+        enqueueSnackbar("Order created but ID missing", { variant: "warning" })
+        return;
+      }
+
+      // Update Table
+      const tableData = {
+        id: customerData.table?.tableId,
+        status: "Booked",
+        orderId: orderId
+      }
+
+      setTimeout(() => {
+        tableUpdateMutation.mutate(tableData)
+      }, 1500)
+    },
+    onError: (error) => {
+      console.log(error)
+      enqueueSnackbar(error?.message || "Failed to place order", { variant: "error" })
+    }
+  })
+
   const handlePlaceOrder = () => {
+    // Validate payment method
     if (!paymentMethod) {
       enqueueSnackbar("Please select a payment method!", {
+        variant: "warning",
+      });
+      return;
+    }
+
+    // Validate cart not empty
+    if (!cartData || cartData.length === 0) {
+      enqueueSnackbar("Cart is empty!", {
+        variant: "warning",
+      });
+      return;
+    }
+
+    // Validate customer data
+    if (!customerData.table) {
+      enqueueSnackbar("No table selected!", {
         variant: "warning",
       });
       return;
@@ -73,23 +139,30 @@ const Bill = () => {
         guests: customerData.guests,
       },
       orderStatus: "In Progress",
-      bills:{
+      bills: {
         total: total,
         tax: tax,
         totalWithTax: totalAfterTax
       },
       items: cartData,
-      table: customerData.table
+      table: customerData.table?.tableId || null,
+      paymentMethod: paymentMethod // Added payment method to order
     }
 
-    // TODO: Send orderData to backend/database 
-    console.log("Order Data:", orderData);
+    enqueueSnackbar("Placing order...", { variant: "info" });
     
-    enqueueSnackbar("Order placed successfully!", { variant: "success" });
-    // Optionally clear cart, navigate, etc. pak me von
+    setTimeout(() => {
+      ordermutation.mutate(orderData)
+    }, 500) // Reduced timeout
   };
 
   const handlePrintReceipt = () => {
+    if (!cartData || cartData.length === 0) {
+      enqueueSnackbar("Cart is empty!", {
+        variant: "warning",
+      });
+      return;
+    }
     setShowReceipt(true);
   };
 
@@ -159,9 +232,10 @@ const Bill = () => {
         </button>
         <button
           onClick={handlePlaceOrder}
-          className="bg-blue-600 w-full px-4 py-3 rounded-lg font-semibold"
+          disabled={ordermutation.isPending}
+          className="bg-blue-600 w-full px-4 py-3 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Place Order
+          {ordermutation.isPending ? "Placing..." : "Place Order"}
         </button>
       </div>
     </>

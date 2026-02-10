@@ -22,13 +22,17 @@ const cartSlice = createSlice({
 
     removeItems: (state, action) => {
       return state.filter(item => item.id !== action.payload);
+    },
+    removeAllItems: (state) => {
+      return []
     }
   }
 });
+
 
 /* ✅ FIXED SELECTOR */
 export const getTotalPrice = (state) =>
   state.cart.reduce((total, item) => total + item.price, 0);
 
-export const { addItems, removeItems } = cartSlice.actions;
+export const { addItems, removeItems, removeAllItems } = cartSlice.actions;
 export default cartSlice.reducer;
