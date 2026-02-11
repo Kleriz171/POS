@@ -17,8 +17,8 @@ const OrderList = ({key, order}) => {
                 <div>
                     <h1 className="text-yellow-500 font-semibold border border-yellow-500 rounded-lg p-2">Table No:{order.table.tableNo}</h1>
                 </div>
-                <div className="text-yellow-600 bg bg-[#85500a3c] p-1 rounded-lg inline flex-col items-start gap-2">
-                        <FaCircle className=" mr-2 text-yellow-600 inline" />
+                <div className={`${order.orderStatus === "In Progress"?"text-yellow-600 bg bg-[#85500a3c]": "text-green-500 bg-[#1e5511]"} p-1 rounded-lg inline flex-col items-start gap-2`}>
+                        <FaCircle className={` mr-2 ${order.orderStatus === "In Progress"?"text-yellow-600]": "text-green-500"}  inline`} />
                         {order.orderStatus}
                 </div>
             </div>

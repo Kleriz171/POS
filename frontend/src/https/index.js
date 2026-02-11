@@ -27,4 +27,5 @@ export const updateTable = ({id, ...tableData}) => api.patch(`/api/table/${id}`,
 export const addOrder = (data) =>api.post("/api/orders", data)
 export const getOrders = () =>api.get("/api/orders")
 export const getOrderById = (id) =>api.get(`/api/orders/${id}`)
-export const updateOrder = ({id, ...orderData}) =>api.patch(`/api/orders/${id}`, orderData)
+export const updateOrderStatus = ({orderId, orderStatus}) =>api.patch(`/api/orders/${orderId}`, {orderStatus})
+
