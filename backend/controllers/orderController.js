@@ -4,8 +4,7 @@ const { default: mongoose } = require("mongoose")
 
 const addOrder = async (req, res, next) => {
     try {
-        const { customerDetails, orderStatus, bills, items } = req.body
-        const order = new Order({ customerDetails, orderStatus, bills, items })
+        const order = new Order(req.body)
         await order.save()
         res.status(201).json({ success: true, message: "Order created!", order })
     } catch (error) {
@@ -38,7 +37,7 @@ const getOrderById = async (req, res, next) => {
 const getOrders = async (req, res, next) => {
     try {
 
-        const orders = await Order.find();
+        const orders = await Order.find().populate("table");
         res.status(200).json({ data: orders })
 
     } catch (error) {

@@ -64,3 +64,21 @@ export const formatDate = (date) => {
 }
 export const formatTime = (date) =>
     `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+
+export const formatTimeAndDate = (date) => {
+    const d = new Date(date);
+    const hours = d.getHours();
+    const minutes = d.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const hours12 = hours % 12 || 12;
+
+    const formattedDate = [
+        d.getFullYear(),
+        (d.getMonth() + 1).toString().padStart(2, '0'),
+        d.getDate().toString().padStart(2, '0')
+    ].join('-');
+
+    const formattedTime = `${hours12}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+
+    return `${formattedDate} at ${formattedTime}`;
+}

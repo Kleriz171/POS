@@ -11,7 +11,7 @@ const OrderCard = ({ key, order }) => {
     const hours12 = hours % 12 || 12;
     const formatted = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')} at ${hours12}:${minutes.toString().padStart(2, '0')} ${ampm}`;
     return (
-        <div className="w-[32%] mb-3 bg-[#262626] rounded-lg p-6">
+        <div key={key} className="w-[32%] mb-3 bg-[#262626] rounded-lg p-6">
             <div className="flex items-center gap-5 ">
                 <button className="bg-yellow-500 p-3 text-xl font-bold rounded-lg">
                     {getAvatarName(order.customerDetails.name)}
@@ -21,7 +21,8 @@ const OrderCard = ({ key, order }) => {
                         <h1 className="text-[#f5f5f5] text-lg font-semibold tracking-wide">
                             {order.customerDetails.name}
                         </h1>
-                        <p className="text-[#ababab] text-sm"> #{Math.floor(new Date(order.orderDate))}/ Dine in</p>
+                        <p className="text-[#ababab] text-sm"> #{Math.floor(new Date(order.orderDate).getTime())}/ Dine in</p>
+                        <p className="text-[#ababab] text-sm"> Table {order.table.tableNo}</p>
                     </div>
                     <div className="flex flex-col items-end gap-2 ">
                         {
